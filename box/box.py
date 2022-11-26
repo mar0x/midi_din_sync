@@ -179,9 +179,12 @@ if midi_sock_count == 2:
     stand_x_step = board_length - 10
     stand_y_step = board_width - 14
 
-    usb_led_step = 12
+    usb_led_step = 13
+    usb_led_x_shift = -13
+    usb_led_count = 1
+    usb_led_shift = 13
 
-    usb_z_shift = 9.5
+    usb_z_shift = 12.3
 
     usb_width = 8.5
     usb_height = 3.5
@@ -258,6 +261,9 @@ if 'usb_height' not in locals():
 if 'usb_led_shift' not in locals():
     usb_led_shift = led_shift
 
+if 'usb_led_x_shift' not in locals():
+    usb_led_x_shift = 0
+
 if 'usb_y_shift' not in locals():
     usb_y_shift = 0
 
@@ -327,7 +333,7 @@ else:
     base = midi_led_plane.hole(led_size)
 
 usb_led_plane = base.faces("<X").workplane(centerOption="CenterOfBoundBox") \
-        .center(0, board_top_shift + usb_led_shift) \
+        .center(usb_led_x_shift, board_top_shift + usb_led_shift) \
         .rarray(usb_led_step, 1, usb_led_count, 1, True)
 
 if isinstance(led_size, (list, tuple)):
